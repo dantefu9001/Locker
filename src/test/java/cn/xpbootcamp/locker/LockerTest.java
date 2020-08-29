@@ -21,6 +21,7 @@ public class LockerTest {
             locker.openAnEmptyLocker();
         }
         Receipt receipt = locker.openAnEmptyLocker();
+        Assert.assertEquals(locker.getErrorMessage(),MessageConstant.NO_MORE_EMPTY_LOCKER);
         Assert.assertNull(receipt);
     }
 
@@ -32,11 +33,12 @@ public class LockerTest {
     }
 
     @Test
-    public void should_not_open_the_corresponding_locker_given_a_used_receipt(){
+    public void should_not_open_the_corresponding_locker_given_an_used_receipt(){
         Locker locker = new Locker();
         Receipt receipt = locker.openAnEmptyLocker();
         locker.scanAReceipt(receipt);
         Assert.assertFalse(locker.scanAReceipt(receipt));
+        Assert.assertEquals(locker.getErrorMessage(),MessageConstant.INVALID_RECEIPT);
     }
 
     @Test
@@ -44,5 +46,6 @@ public class LockerTest {
         Locker locker = new Locker();
         Receipt receipt = new Receipt();
         Assert.assertFalse(locker.scanAReceipt(receipt));
+        Assert.assertEquals(locker.getErrorMessage(),MessageConstant.INVALID_RECEIPT);
     }
 }
