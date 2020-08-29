@@ -10,7 +10,6 @@ public class LockerTest {
     @Test
     public void should_open_an_empty_locker_given_request_to_store_when_having_empty_lockers(){
         Locker locker = new Locker();
-        locker.setStatus(!IS_FULL);
         Receipt receipt = locker.openAnEmptyLocker();
         Assert.assertNotNull(receipt);
     }
@@ -18,7 +17,9 @@ public class LockerTest {
     @Test
     public void should_not_open_a_locker_given_request_to_store_when_having_no_empty_lockers(){
         Locker locker = new Locker();
-        locker.setStatus(IS_FULL);
+        while(locker.isStatus()!=IS_FULL){
+            locker.openAnEmptyLocker();
+        }
         Receipt receipt = locker.openAnEmptyLocker();
         Assert.assertNull(receipt);
     }

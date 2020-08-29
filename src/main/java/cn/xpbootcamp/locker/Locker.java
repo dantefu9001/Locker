@@ -31,6 +31,10 @@ public class Locker {
         }
     }
 
+    public boolean isStatus(){
+        return capacityCheck();
+    }
+
     public void setStatus(boolean status) {
         this.status = status;
     }
