@@ -11,7 +11,7 @@ public class LockerTest {
     public void should_open_an_empty_locker_given_request_to_store_when_having_empty_lockers(){
         Locker locker = new Locker();
         locker.setStatus(!IS_FULL);
-        Receipt receipt = locker.openEmptyLocker();
+        Receipt receipt = locker.openAnEmptyLocker();
         Assert.assertNotNull(receipt);
     }
 
@@ -19,7 +19,14 @@ public class LockerTest {
     public void should_not_open_a_locker_given_request_to_store_when_having_no_empty_lockers(){
         Locker locker = new Locker();
         locker.setStatus(IS_FULL);
-        Receipt receipt = locker.openEmptyLocker();
+        Receipt receipt = locker.openAnEmptyLocker();
         Assert.assertNull(receipt);
+    }
+
+    @Test
+    public void should_open_the_corresponding_locker_given_a_valid_receipt_when_receipt_matches(){
+        Locker locker = new Locker();
+        Receipt receipt = locker.openAnEmptyLocker();
+        Assert.assertTrue(locker.scanAReceipt(receipt));
     }
 }
