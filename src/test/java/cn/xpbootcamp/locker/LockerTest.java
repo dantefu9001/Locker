@@ -37,4 +37,11 @@ public class LockerTest {
         locker.scanAReceipt(receipt);
         Assert.assertFalse(locker.scanAReceipt(receipt));
     }
+
+    @Test
+    public void should_not_open_the_corresponding_locker_given_a_invalid_receipt(){
+        Locker locker = new Locker();
+        Receipt receipt = new Receipt();
+        Assert.assertFalse(locker.scanAReceipt(receipt));
+    }
 }
