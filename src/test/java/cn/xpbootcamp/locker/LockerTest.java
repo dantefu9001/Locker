@@ -24,9 +24,17 @@ public class LockerTest {
     }
 
     @Test
-    public void should_open_the_corresponding_locker_given_a_valid_receipt_when_receipt_matches(){
+    public void should_open_the_corresponding_locker_given_a_valid_receipt_for_the_first_time(){
         Locker locker = new Locker();
         Receipt receipt = locker.openAnEmptyLocker();
         Assert.assertTrue(locker.scanAReceipt(receipt));
+    }
+
+    @Test
+    public void should_not_open_the_corresponding_locker_given_a_used_receipt(){
+        Locker locker = new Locker();
+        Receipt receipt = locker.openAnEmptyLocker();
+        locker.scanAReceipt(receipt);
+        Assert.assertFalse(locker.scanAReceipt(receipt));
     }
 }
