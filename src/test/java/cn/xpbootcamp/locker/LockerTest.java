@@ -10,7 +10,7 @@ public class LockerTest {
     @Test
     public void should_open_an_empty_locker_given_request_to_store_when_having_empty_lockers(){
         Locker locker = new Locker();
-        Receipt receipt = locker.openAnEmptyLocker();
+        Receipt receipt = locker.storePackage();
         Assert.assertNotNull(receipt);
     }
 
@@ -18,9 +18,9 @@ public class LockerTest {
     public void should_not_open_a_locker_given_request_to_store_when_having_no_empty_lockers(){
         Locker locker = new Locker();
         while(locker.isStatus()!=IS_FULL){
-            locker.openAnEmptyLocker();
+            locker.storePackage();
         }
-        Receipt receipt = locker.openAnEmptyLocker();
+        Receipt receipt = locker.storePackage();
         Assert.assertEquals(locker.getErrorMessage(),MessageConstant.NO_MORE_EMPTY_LOCKER);
         Assert.assertNull(receipt);
     }
@@ -28,16 +28,16 @@ public class LockerTest {
     @Test
     public void should_open_the_corresponding_locker_given_a_valid_receipt_for_the_first_time(){
         Locker locker = new Locker();
-        Receipt receipt = locker.openAnEmptyLocker();
-        Assert.assertTrue(locker.scanAReceipt(receipt));
+        Receipt receipt = locker.storePackage();
+        Assert.assertTrue(locker.takePackage(receipt));
     }
 
     @Test
     public void should_not_open_the_corresponding_locker_given_an_used_receipt(){
         Locker locker = new Locker();
-        Receipt receipt = locker.openAnEmptyLocker();
-        locker.scanAReceipt(receipt);
-        Assert.assertFalse(locker.scanAReceipt(receipt));
+        Receipt receipt = locker.storePackage();
+        locker.takePackage(receipt);
+        Assert.assertFalse(locker.takePackage(receipt));
         Assert.assertEquals(locker.getErrorMessage(),MessageConstant.INVALID_RECEIPT);
     }
 
@@ -45,7 +45,7 @@ public class LockerTest {
     public void should_not_open_the_corresponding_locker_given_a_invalid_receipt(){
         Locker locker = new Locker();
         Receipt receipt = new Receipt();
-        Assert.assertFalse(locker.scanAReceipt(receipt));
+        Assert.assertFalse(locker.takePackage(receipt));
         Assert.assertEquals(locker.getErrorMessage(),MessageConstant.INVALID_RECEIPT);
     }
 }

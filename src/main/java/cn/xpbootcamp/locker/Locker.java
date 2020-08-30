@@ -23,7 +23,7 @@ public class Locker {
         return !IS_FULL;
     }
 
-    public Receipt openAnEmptyLocker() {
+    public Receipt storePackage() {
         if (capacityCheck() == IS_FULL) {
             errorMessage = MessageConstant.NO_MORE_EMPTY_LOCKER;
             return null;
@@ -34,7 +34,7 @@ public class Locker {
         }
     }
 
-    public boolean scanAReceipt(Receipt receipt) {
+    public boolean takePackage(Receipt receipt) {
         if (receipts.contains(receipt)) {
             receipts.remove(receipt);
             return true;
