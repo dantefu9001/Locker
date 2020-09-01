@@ -16,6 +16,11 @@ public class Locker {
         lockerCapacity = 10;
     }
 
+    public Locker(int lockerCapacity){
+        receipts = new ArrayList<>(lockerCapacity);
+        this.lockerCapacity = lockerCapacity;
+    }
+
     private boolean capacityCheck() {
         if (receipts.size() == lockerCapacity) {
             return IS_FULL;
@@ -28,7 +33,7 @@ public class Locker {
             errorMessage = MessageConstant.NO_MORE_EMPTY_LOCKER;
             return null;
         } else {
-            Receipt receipt = new Receipt();
+            Receipt receipt = new Receipt(this);
             receipts.add(receipt);
             return receipt;
         }
@@ -44,7 +49,7 @@ public class Locker {
         }
     }
 
-    public boolean isStatus() {
+    public boolean isFull() {
         return capacityCheck();
     }
 

@@ -17,7 +17,7 @@ public class LockerTest {
     @Test
     public void should_not_open_a_locker_given_request_to_store_when_having_no_empty_lockers(){
         Locker locker = new Locker();
-        while(locker.isStatus()!=IS_FULL){
+        while(locker.isFull()!=IS_FULL){
             locker.storePackage();
         }
         Receipt receipt = locker.storePackage();
