@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RobotLockerTest {
+public class LockerBotTest {
 
     @Test
     public void should_return_success_given_locker_with_free_capacity_when_store_bag() {
@@ -61,6 +61,7 @@ public class RobotLockerTest {
         List<Locker> lockers = new ArrayList<>();
         lockers.add(lockerA);
         lockers.add(lockerB);
+        lockerBot.storeBag(lockers);
         Receipt receipt = new Receipt();
         Assert.assertFalse(lockerBot.takeBag(receipt));
     }
