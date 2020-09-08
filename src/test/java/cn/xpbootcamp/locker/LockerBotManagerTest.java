@@ -7,12 +7,13 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class LockerBotManagerTest {
     @Test
     public void should_success_when_saving_bags_given_lockers_with_free_capacity() {
-        Locker lockerC = new Locker(10);
-        LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(lockerC));
+        Locker locker = new Locker(10);
+        LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(locker));
         assertNotNull(lockerBotManager.storeBag());
     }
 
@@ -38,4 +39,11 @@ public class LockerBotManagerTest {
         Assert.assertEquals(smartLocker.getFreeCapacity(), 9);
     }
 
+    @Test
+    public void should_success_when_take_bag_given_valid_receipt(){
+        Locker locker = new Locker(10);
+        LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(locker));
+        Receipt receipt = lockerBotManager.storeBag();
+        assertTrue(lockerBotManager.takeBag(receipt));
+    }
 }
