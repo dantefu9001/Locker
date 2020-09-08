@@ -41,7 +41,7 @@ public class LockerBotManagerTest {
     }
 
     @Test
-    public void should_success_when_take_bag_given_valid_receipt(){
+    public void should_success_when_take_bag_given_valid_receipt() {
         Locker locker = new Locker(10);
         LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(locker));
         Receipt receipt = lockerBotManager.storeBag();
@@ -49,11 +49,27 @@ public class LockerBotManagerTest {
     }
 
     @Test
-    public void should_fail_when_take_bag_given_invalid_receipt(){
+    public void should_fail_when_take_bag_given_invalid_receipt() {
         Locker locker = new Locker(10);
         LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(locker));
         lockerBotManager.storeBag();
         Receipt newReceipt = new Receipt();
         assertFalse(lockerBotManager.takeBag(newReceipt));
+    }
+
+    @Test
+    public void should_success_when_ask_other_bot_take_bag() {
+        Locker primaryLocker = new Locker(10);
+        Locker smartLocker = new Locker(10);
+        Locker managerLocker = new Locker(10);
+        PrimaryLockerBot primaryLockerBot = new PrimaryLockerBot(Collections.singletonList(primaryLocker));
+        SmartLockerBot smartLockerBot = new SmartLockerBot(Collections.singletonList(smartLocker));
+        LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(managerLocker));
+        Receipt primaryReceipt = lockerBotManager.askBotToStoreBag(primaryLockerBot);
+        Receipt smartReceipt = lockerBotManager.askBotToStoreBag(smartLockerBot);
+        assertNotNull(primaryReceipt);
+        assertNotNull(smartReceipt);
+        assertTrue(lockerBotManager.askBotToTakeBag(primaryLockerBot, primaryReceipt));
+        assertTrue(lockerBotManager.askBotToTakeBag(smartLockerBot, smartReceipt));
     }
 }

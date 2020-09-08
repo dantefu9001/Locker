@@ -22,4 +22,9 @@ public class LockerBotManager extends BaseLockerBot{
     public Receipt askBotToStoreBag(BaseLockerBot lockerBot) {
         return lockerBot.storeBag();
     }
+
+    public boolean askBotToTakeBag(BaseLockerBot lockerBot, Receipt smartReceipt) {
+        return lockerBot.takeBag(smartReceipt);
+    }
+
 }
