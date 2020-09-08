@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.Collections;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -45,5 +46,14 @@ public class LockerBotManagerTest {
         LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(locker));
         Receipt receipt = lockerBotManager.storeBag();
         assertTrue(lockerBotManager.takeBag(receipt));
+    }
+
+    @Test
+    public void should_fail_when_take_bag_given_invalid_receipt(){
+        Locker locker = new Locker(10);
+        LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(locker));
+        lockerBotManager.storeBag();
+        Receipt newReceipt = new Receipt();
+        assertFalse(lockerBotManager.takeBag(newReceipt));
     }
 }
