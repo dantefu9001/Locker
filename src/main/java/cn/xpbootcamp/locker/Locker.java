@@ -56,4 +56,11 @@ public class Locker {
     public String getErrorMessage() {
         return errorMessage;
     }
+
+    public int getFreeCapacity(){
+        if(this.isFull()) {
+            return 0;
+        }
+        return lockerCapacity - receipts.size();
+    }
 }

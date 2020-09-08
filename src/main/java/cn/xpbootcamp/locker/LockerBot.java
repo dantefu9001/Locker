@@ -3,26 +3,19 @@ package cn.xpbootcamp.locker;
 import java.util.List;
 import java.util.Objects;
 
-public class LockerBot {
+public class LockerBot extends BaseLockerBot{
 
-    private Locker locker;
-
-    public Receipt storeBag(Locker locker) {
-        this.locker = locker;
-        return locker.storePackage();
+    public LockerBot(List<Locker> lockers) {
+        super(lockers);
     }
 
-    public Receipt storeBag(List<Locker> lockers) {
+    @Override
+    public Receipt storeBag() {
         for (Locker locker : lockers) {
             if (!locker.isFull()) {
-                this.locker = locker;
                 return locker.storePackage();
             }
         }
         return null;
-    }
-
-    public boolean takeBag(Receipt receipt) {
-        return Objects.nonNull(locker) && locker.takePackage(receipt);
     }
 }
