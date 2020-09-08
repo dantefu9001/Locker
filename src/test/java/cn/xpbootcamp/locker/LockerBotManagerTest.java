@@ -1,5 +1,6 @@
 package cn.xpbootcamp.locker;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -16,10 +17,20 @@ public class LockerBotManagerTest {
     }
 
     @Test
-    public void should_fail_when_saving_bags_given_lockers_with_no_capacity(){
+    public void should_fail_when_saving_bags_given_lockers_with_no_capacity() {
         Locker locker = new Locker(1);
         LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(locker));
         lockerBotManager.storeBag();
         assertNull(lockerBotManager.storeBag());
+    }
+
+    @Test
+    public void should_success_when_ask_primary_bot_to_save() {
+        Locker primaryLocker = new Locker(10);
+        Locker managerLocker = new Locker(10);
+        PrimaryLockerBot primaryLockerBot = new PrimaryLockerBot(Collections.singletonList(primaryLocker));
+        LockerBotManager lockerBotManager = new LockerBotManager(Collections.singletonList(managerLocker));
+        assertNotNull(lockerBotManager.askBotToStoreBag(primaryLockerBot));
+        Assert.assertEquals(primaryLocker.getFreeCapacity(), 9);
     }
 }

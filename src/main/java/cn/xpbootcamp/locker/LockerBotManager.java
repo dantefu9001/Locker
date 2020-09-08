@@ -17,4 +17,9 @@ public class LockerBotManager extends BaseLockerBot{
         }
         return null;
     }
+
+
+    public Receipt askBotToStoreBag(BaseLockerBot lockerBot) {
+        return lockerBot.storeBag();
+    }
 }

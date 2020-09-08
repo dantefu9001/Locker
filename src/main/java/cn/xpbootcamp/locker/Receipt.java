@@ -10,7 +10,6 @@ public class Receipt {
     private Locker locker;
 
     public Receipt(){
-        Date date = new Date();
         this.uuid = UUID.randomUUID();
     }
 
