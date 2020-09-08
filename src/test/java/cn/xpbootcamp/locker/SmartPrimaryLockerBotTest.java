@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class SmartLockerBotTest {
+public class SmartPrimaryLockerBotTest {
 
     @Test
     public void should_return_ticket_when_smart_locker_robot_save_bag_given_a_locker_with_10_capacity_and_bag() {

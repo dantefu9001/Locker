@@ -1,11 +1,10 @@
 package cn.xpbootcamp.locker;
 
 import java.util.List;
-import java.util.Objects;
 
-public class LockerBot extends BaseLockerBot{
+public class LockerBotManager extends BaseLockerBot{
 
-    public LockerBot(List<Locker> lockers) {
+    public LockerBotManager(List<Locker> lockers) {
         super(lockers);
     }
 
